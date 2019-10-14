@@ -4,20 +4,21 @@ $(document).ready(function(){
     var bikes = [];
         
     class Bike {
-        constructor(type, name, sizes, colors) {
+        constructor(type, name, sizes, colors, icon) {
             this.type = type,
             this.name = name,
             this.sizes = sizes,
-            this.colors = colors
+            this.colors = colors,
+            this.icon = icon,
             bikes.push(this);
-        }
+        };
     }
 
-    let cityMale = new Bike("cityMale", "stadsfiets heren", ["50", "57", "61"], ["blue", "red", "pink"]);
-    let cityFemale = new Bike("cityFemale", "stadsfiets dames", ["50", "57"], ["blue", "yellow", "pink"]);
-    let electrMale = new Bike("electrMale", "electrische fiets heren", ["50", "57", "61"], ["blue"]);
-    let electrFemale = new Bike("electrFemale", "electrische fiets dames", ["43", "50", "57"], ["green", "red", "pink"]);
-    let portable = new Bike("portable", "plooifiets", [], ["black", "red", "pink"]);
+    let cityMale = new Bike("cityMale", "stadsfiets heren", ["50", "57", "61"], ["blue", "red", "pink"], "<i class='fas fa-bicycle'></i>");
+    let cityFemale = new Bike("cityFemale", "stadsfiets dames", ["50", "57"], ["blue", "yellow", "pink"], "<i class='fas fa-bicycle'></i>");
+    let electrMale = new Bike("electrMale", "electrische fiets heren", ["50", "57", "61"], ["blue"], '<i class="fas fa-motorcycle"></i>');
+    let electrFemale = new Bike("electrFemale", "electrische fiets dames", ["43", "50", "57"], ["green", "red", "pink"], '<i class="fas fa-motorcycle"></i>');
+    let portable = new Bike("portable", "plooifiets", ["40"], ["black", "red", "pink"], '<i class="fas fa-sleigh"></i>');
 
     let accessoires = ["fietsbel", "lichtjes", "slot", "diefstalverzekering"];
 
@@ -47,13 +48,19 @@ $(document).ready(function(){
                 var text = '<h3>kies uw grootte</h3>';
                 if(bike.sizes.length == 0){
                     text += '<input class="w3-radio" type="radio" name="size" value="no-size"><label for="no-size">Deze fiets heeft een uniform formaat. Klik om verder te gaan.</label><br><br>';
+                    $('.thebike').html(bike.icon);
                 }else{
-                bike.sizes.forEach(function(size){
-                    text += '<input class="w3-radio" type="radio" name="size" value="'+size+'"><label for="'+size+'">'+size+'</label><br><br>';
-                });
+                    bike.sizes.forEach(function(size){
+                        text += '<input class="w3-radio" type="radio" name="size" value="'+size+'"><label for="'+size+'">'+size+'</label><br><br>';
+                    });
+                    $('.thebike').html(bike.icon);
                 }
             }
             $( "#size" ).html( text );
+            $('input:radio[name="size"]').change( function(){
+                console.log($('input:radio[name="size"]:checked').val());
+                $('.thebike').css("font-size", 4*$('input:radio[name="size"]:checked').val()+"px")
+            });
         });
 
         bikes.forEach(function(bike){
@@ -64,6 +71,10 @@ $(document).ready(function(){
                 });
                 $( "#color" ).html( text );
             }
+            $('input:radio[name="color"]').change( function(){
+                console.log($('input:radio[name="color"]:checked').val());
+                $('.thebike').css("color", $('input:radio[name="color"]:checked').val())
+            });
         });
     
     });
