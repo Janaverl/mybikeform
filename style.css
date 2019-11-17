@@ -38,9 +38,9 @@ form{
 
 
 .thebike{
-    position: fixed;
+    /* position: fixed;
     bottom: 10px;
-    left: 30px;
+    left: 30px; */
     color: red;
     font-size: 100px;
 }

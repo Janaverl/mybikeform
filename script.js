@@ -46,15 +46,10 @@ $(document).ready(function(){
         bikes.forEach(function(bike){
             if(bike.type == chosenType){
                 var text = '<h3>kies uw grootte</h3>';
-                if(bike.sizes.length == 0){
-                    text += '<input class="w3-radio" type="radio" name="size" value="no-size"><label for="no-size">Deze fiets heeft een uniform formaat. Klik om verder te gaan.</label><br><br>';
-                    $('.thebike').html(bike.icon);
-                }else{
-                    bike.sizes.forEach(function(size){
-                        text += '<input class="w3-radio" type="radio" name="size" value="'+size+'"><label for="'+size+'">'+size+'</label><br><br>';
-                    });
-                    $('.thebike').html(bike.icon);
-                }
+                bike.sizes.forEach(function(size){
+                    text += '<input class="w3-radio" type="radio" name="size" value="'+size+'"><label for="'+size+'">'+size+'</label><br><br>';
+                });
+                $('.thebike').html(bike.icon);
             }
             $( "#size" ).html( text );
             $('input:radio[name="size"]').change( function(){
